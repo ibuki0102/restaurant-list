@@ -25,6 +25,7 @@
 </div>
 {{! restaurant-list }}
 <div class='container mt-5'>
+  {{! 如果flash_error_message有值才顯示，這邊是用bootstrap的模板來顯示錯誤訊息 }}
   {{#if flash_error_message}}
     <div class='alert alert-danger alert-dismissible' role='alert'>
       <button
@@ -34,6 +35,7 @@
         aria-label='Close'
       ></button>
       <strong>噢不...</strong>
+      {{! 顯示錯誤訊息 }}
       {{flash_error_message}}
     </div>
   {{/if}}

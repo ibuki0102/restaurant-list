@@ -14,7 +14,7 @@ app.use(
   session({
     secret: 'test',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 )
 app.use(function (req, res, next) {
@@ -38,7 +38,7 @@ app.get('/search', (req, res) => {
   const keyword = req.query.keyword.replace(/(^\s*)|(\s*$)/g, '')
   // 搜尋欄為空
   if (!keyword) {
-    return res.redirect('/')
+    return res.redirect('/') // 等於回到26行
   }
   const restaurants = restaurantList.results.filter(
     (restaurant) =>
@@ -46,6 +46,7 @@ app.get('/search', (req, res) => {
       restaurant.category.toLowerCase().includes(keyword.toLowerCase())
   )
   if (restaurants.length === 0) {
+    // 設定key的名稱為'flash_error_message'，並賦值`沒有符合搜尋結果: "${keyword}" 的餐廳。`
     req.flash('flash_error_message', `沒有符合搜尋結果: "${keyword}" 的餐廳。`)
     return res.redirect('/')
   }
